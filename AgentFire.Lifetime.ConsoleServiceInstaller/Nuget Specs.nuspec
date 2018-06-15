@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>AgentFire.Lifetime.ConsoleServiceInstaller</id>
+    <version>1.0</version>
+    <title>Console Service Installer</title>
+    <authors>AgentFire</authors>
+    <owners>AgentFire</owners>
+    <projectUrl>https://github.com/AgentFire/AgentFire.Lifetime.ConsoleServiceInstaller</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Starts a console mode service installed with options: install, uninstall, start and stop the service, pointed at your executable.</description>
+    <releaseNotes>First release.</releaseNotes>
+    <tags>console service windows-service installer installutil</tags>
+  </metadata>
+</package>
