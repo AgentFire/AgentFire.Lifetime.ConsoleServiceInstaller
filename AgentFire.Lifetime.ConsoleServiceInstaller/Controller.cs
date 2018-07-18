@@ -13,7 +13,7 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
         /// <param name="serviceName">The exact name of the Windows Service.</param>
         /// <param name="parameters">Some params.</param>
         /// <returns>True if user selected to conitnue in console mode (if enabled in <see cref="RunParameters"/>), otherwise false.</returns>
-        public static bool Run(string serviceName, RunParameters parameters)
+        public static bool Run(string serviceName, RunParameters parameters, string singleCommand = null)
         {
             bool exit = false;
             bool @continue = false;
@@ -43,7 +43,18 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
                     validInput = true;
                     Console.Write("Your input: ");
                     Console.ForegroundColor = ConsoleColor.Green;
-                    string input = Console.ReadLine();
+                    string input;
+
+                    if (singleCommand == null)
+                    {
+                        input = Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine(singleCommand);
+                        input = singleCommand;
+                    }
+
                     Console.ForegroundColor = ConsoleColor.Gray;
 
                     switch (input)
@@ -93,6 +104,10 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
                     }
                 } while (!validInput);
 
+                if (singleCommand != null)
+                {
+                    exit = true;
+                }
             } while (!exit);
 
             return @continue;

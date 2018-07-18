@@ -13,7 +13,7 @@ namespace TestProject
                 if (Environment.UserInteractive)
                 {
                     // Startup as console app.
-                    Controller.Run(service.ServiceName, new RunParameters());
+                    Controller.Run(service.ServiceName, new RunParameters(), args != null && args.Length == 1 ? args[0] : null);
                 }
                 else
                 {

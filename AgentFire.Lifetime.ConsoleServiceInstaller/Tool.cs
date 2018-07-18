@@ -47,7 +47,7 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
             try
             {
                 GetService(serviceName).Start();
-                GetService(serviceName).WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromMinutes(1));
+                GetService(serviceName).WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(30));
             }
             catch (Exception ex)
             {
@@ -59,7 +59,7 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
             try
             {
                 GetService(serviceName).Stop();
-                GetService(serviceName).WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromMinutes(1));
+                GetService(serviceName).WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(30));
             }
             catch (Exception ex)
             {
