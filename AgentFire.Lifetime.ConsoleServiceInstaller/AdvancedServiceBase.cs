@@ -12,14 +12,14 @@ using System.ServiceProcess;
 
 namespace AgentFire.Lifetime.ConsoleServiceInstaller
 {
-    public abstract class SimpleInstallerBase : Installer
+    public abstract class AdvancedServiceBase : Installer
     {
         public abstract ServiceAccount Account { get; }
         public abstract ServiceStartMode StartType { get; }
 
         private const string BuiltInAdministratorsRole = @"BUILTIN\Administrators";
 
-        protected SimpleInstallerBase(string serviceName)
+        protected AdvancedServiceBase(string serviceName)
         {
             AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
 
@@ -87,15 +87,21 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
         [PrincipalPermission(SecurityAction.Demand, Role = BuiltInAdministratorsRole)]
         protected void AddNamespaceReservations(params string[] urls)
         {
-            foreach (string url in urls)
+            try
             {
-                using (Process proc = Process.Start("netsh", $"http add urlacl url={url} user=\"Network Service\""))
+                SecurityIdentifier id = new SecurityIdentifier(WellKnownSidType.NetworkServiceSid, null);
+                string accName = id.Translate(typeof(NTAccount)).Value;
+
+                foreach (string url in urls)
                 {
-                    proc.Start();
-                    proc.WaitForExit();
+                    using (Process proc = Process.Start("netsh", $"http add urlacl url={url} user=\"{accName}\""))
+                    {
+                        proc.Start();
+                        proc.WaitForExit();
+                    }
                 }
-                //netsh http add urlacl url=https://+:443/smmite-backend user="Network Service"
             }
+            catch { }
         }
 
         /// <summary>
@@ -104,16 +110,19 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
         [PrincipalPermission(SecurityAction.Demand, Role = BuiltInAdministratorsRole)]
         protected void RemoveNamespaceReservations(params string[] urls)
         {
-            foreach (string url in urls)
+            try
             {
-                using (Process proc = Process.Start("netsh", $"http delete urlacl url={url}"))
+                foreach (string url in urls)
                 {
-                    proc.Start();
-                    proc.WaitForExit();
-                }
+                    using (Process proc = Process.Start("netsh", $"http delete urlacl url={url}"))
+                    {
+                        proc.Start();
+                        proc.WaitForExit();
+                    }
 
-                //netsh http add urlacl url=https://+:443/smmite-backend user="Network Service"
+                }
             }
+            catch { }
         }
 
         #endregion

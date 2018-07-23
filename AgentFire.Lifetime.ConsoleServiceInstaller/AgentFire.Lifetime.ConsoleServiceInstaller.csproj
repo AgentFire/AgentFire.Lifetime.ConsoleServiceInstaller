@@ -46,7 +46,7 @@
     <Compile Include="SmartNetworkServiceInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="SimpleServiceBase.cs">
+    <Compile Include="AdvancedServiceBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Tool.cs" />
