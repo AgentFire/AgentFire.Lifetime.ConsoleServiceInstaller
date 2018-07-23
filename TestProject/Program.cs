@@ -1,9 +1,16 @@
 ﻿using AgentFire.Lifetime.ConsoleServiceInstaller;
 using System;
+using System.ComponentModel;
 using System.ServiceProcess;
 
 namespace TestProject
 {
+    [RunInstaller(true)]
+    public sealed class Ins : SmartNetworkServiceInstaller
+    {
+        public Ins() : base("My Test Service", "http://+:80/yay", "https://+:443/yay") { }
+    }
+
     class Program
     {
         static void Main(string[] args)

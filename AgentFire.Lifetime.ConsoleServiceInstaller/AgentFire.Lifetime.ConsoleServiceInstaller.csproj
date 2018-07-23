@@ -40,6 +40,15 @@
     <Compile Include="RunParameters.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleLocalSystemInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SmartNetworkServiceInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SimpleServiceBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tool.cs" />
   </ItemGroup>
   <ItemGroup>
