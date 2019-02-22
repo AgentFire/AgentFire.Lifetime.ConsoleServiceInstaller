@@ -10,6 +10,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Starts a console mode service installer with options: install, uninstall, start and stop the service, pointed at your executable.</description>
     <releaseNotes>Comfortability: added sugar for Service Dependencies. Added sugar for detecting MSSQL instances installed.</releaseNotes>
-    <tags>console service windows-service installer installutil</tags>
+    <tags>console service windows-service installer installutil install-util installutil.exe</tags>
   </metadata>
 </package>
