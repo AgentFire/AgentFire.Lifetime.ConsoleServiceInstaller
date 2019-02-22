@@ -1,4 +1,4 @@
-Usage:
+## Usage:
 
     [RunInstaller(true)]
     public sealed class Ins : SmartNetworkServiceInstaller
@@ -27,7 +27,7 @@ Usage:
         }
     }
     
-Notes:
+### Notes:
 
 1. Make sure your `Installer` class is located in the Entry Assembly (exe).
 2. Make sure your `Installer` class has `[RunInstaller(true)]` attribute.
@@ -35,3 +35,19 @@ Notes:
 4. Use `Environment.UserInteractive` property to detect whether or not your program is run as service or as desktop-user-started.
 5. `using (WinService service = new WinService())` is not necessary. I just like to dispose of things. :)
 6. `SmartNetworkServiceInstaller` isn't the only thing in there.
+
+### Some extra feature:
+
+    [RunInstaller(true)]
+    public sealed partial class ProjectInstaller : SimpleLocalSystemInstaller
+    {
+        public const string ServiceName = "My Test Service";
+
+        public ProjectInstaller() : base(ServiceName) { }
+
+        // Lets your service's startup to depend on some SQL instances already installed in the system.
+        protected override IEnumerable<string> EnumerateDependencies()
+        {
+            return base.EnumerateDependencies().Concat(ServiceHelper.GetInstalledMssqlServerInstances());
+        }
+    }
