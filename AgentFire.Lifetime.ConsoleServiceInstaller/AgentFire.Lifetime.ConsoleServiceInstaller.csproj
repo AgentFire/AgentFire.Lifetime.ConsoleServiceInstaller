@@ -40,6 +40,7 @@
     <Compile Include="RunParameters.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceHelper.cs" />
     <Compile Include="SimpleLocalSystemInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -52,7 +53,9 @@
     <Compile Include="Tool.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Nuget Specs.nuspec" />
+    <None Include="Nuget Specs.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

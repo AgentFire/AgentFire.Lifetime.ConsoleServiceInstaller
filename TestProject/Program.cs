@@ -1,6 +1,8 @@
 ﻿using AgentFire.Lifetime.ConsoleServiceInstaller;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.ServiceProcess;
 
 namespace TestProject
@@ -9,6 +11,11 @@ namespace TestProject
     public sealed class Ins : SmartNetworkServiceInstaller
     {
         public Ins() : base("My Test Service", "http://+:80/yay", "https://+:443/yay") { }
+
+        protected override IEnumerable<string> EnumerateDependencies()
+        {
+            return base.EnumerateDependencies().Concat(ServiceHelper.GetInstalledMssqlServerInstances());
+        }
     }
 
     class Program
