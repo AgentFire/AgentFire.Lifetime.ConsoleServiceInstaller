@@ -19,7 +19,7 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
 
             try
             {
-                ManagedInstallerClass.InstallHelper(new string[] { _location });
+                ManagedInstallerClass.InstallHelper(new string[] { _location, "-dev" });
                 Console.WriteLine("Done!");
             }
             catch (Exception ex)

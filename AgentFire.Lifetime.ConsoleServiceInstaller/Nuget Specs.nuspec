@@ -2,14 +2,14 @@
 <package>
   <metadata>
     <id>AgentFire.Lifetime.ConsoleServiceInstaller</id>
-    <version>1.5</version>
+    <version>2.0</version>
     <title>Console Service Installer</title>
     <authors>AgentFire</authors>
     <owners>AgentFire</owners>
     <projectUrl>https://github.com/AgentFire/AgentFire.Lifetime.ConsoleServiceInstaller</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Starts a console mode service installer with options: install, uninstall, start and stop the service, pointed at your executable.</description>
-    <releaseNotes>Comfortability: added sugar for Service Dependencies. Added sugar for detecting MSSQL instances installed.</releaseNotes>
+    <releaseNotes>Added an overridable property where you can specify arguments for your service.</releaseNotes>
     <tags>console service windows-service installer installutil install-util installutil.exe</tags>
   </metadata>
 </package>

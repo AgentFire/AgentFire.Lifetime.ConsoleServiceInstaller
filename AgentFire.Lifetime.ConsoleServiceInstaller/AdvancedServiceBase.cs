@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration.Install;
@@ -10,6 +11,7 @@ using System.Security.AccessControl;
 using System.Security.Permissions;
 using System.Security.Principal;
 using System.ServiceProcess;
+using System.Threading;
 
 namespace AgentFire.Lifetime.ConsoleServiceInstaller
 {
@@ -20,12 +22,15 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
         public abstract ServiceAccount Account { get; }
         public abstract ServiceStartMode StartType { get; }
 
+        protected virtual IEnumerable<string> serviceParameters => Enumerable.Empty<string>();
+
         protected AdvancedServiceBase(string serviceName)
         {
             // Instantiate installer for process and service.
             ServiceProcessInstaller processInstaller = new ServiceProcessInstaller();
+
             ServiceInstaller serviceInstaller = new ServiceInstaller();
-            
+
             processInstaller.Account = Account;
             serviceInstaller.StartType = StartType;
             serviceInstaller.ServiceName = serviceName;
@@ -36,6 +41,13 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
             // Add installer to collection. Order is not important if more than one service.
             Installers.Add(serviceInstaller);
             Installers.Add(processInstaller);
+        }
+
+        protected override void OnBeforeInstall(IDictionary savedState)
+        {
+            Context.Parameters["assemblypath"] = Context.Parameters["assemblypath"] + string.Join(string.Empty, serviceParameters.Select(T => $" \"{T}\""));
+
+            base.OnBeforeInstall(savedState);
         }
 
         #region Directory Access Permissions
