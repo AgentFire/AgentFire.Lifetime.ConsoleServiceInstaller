@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.ServiceProcess;
-using System.Text;
+﻿using System.ServiceProcess;
+using System.Threading;
 
 namespace TestProject
 {
@@ -19,6 +13,7 @@ namespace TestProject
         protected override void OnStart(string[] args)
         {
             // TODO: Add code here to start your service.
+
         }
 
         protected override void OnStop()

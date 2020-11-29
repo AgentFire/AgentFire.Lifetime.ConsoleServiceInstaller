@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.ServiceProcess;
+using System.Threading;
 
 namespace TestProject
 {
@@ -14,8 +15,10 @@ namespace TestProject
 
         protected override IEnumerable<string> EnumerateDependencies()
         {
-            return base.EnumerateDependencies().Concat(ServiceHelper.GetInstalledMssqlServerInstances());
+            return base.EnumerateDependencies();//.Concat(ServiceHelper.GetInstalledMssqlServerInstances());
         }
+
+        protected override IEnumerable<string> ServiceParameters => new string[] { "-dev", "-test" };
     }
 
     class Program
@@ -31,6 +34,7 @@ namespace TestProject
                 }
                 else
                 {
+                    Thread.Sleep(5000);
                     // Startup as service.
                     ServiceBase.Run(service);
                 }

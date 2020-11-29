@@ -22,7 +22,7 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
         public abstract ServiceAccount Account { get; }
         public abstract ServiceStartMode StartType { get; }
 
-        protected virtual IEnumerable<string> serviceParameters => Enumerable.Empty<string>();
+        protected virtual IEnumerable<string> ServiceParameters => Enumerable.Empty<string>();
 
         protected AdvancedServiceBase(string serviceName)
         {
@@ -45,7 +45,9 @@ namespace AgentFire.Lifetime.ConsoleServiceInstaller
 
         protected override void OnBeforeInstall(IDictionary savedState)
         {
-            Context.Parameters["assemblypath"] = Context.Parameters["assemblypath"] + string.Join(string.Empty, serviceParameters.Select(T => $" \"{T}\""));
+            string p = string.Join(string.Empty, ServiceParameters.Select(T => $" \"{T}\""));
+
+            Context.Parameters["assemblypath"] = $"\"{Context.Parameters["assemblypath"]}\"{p}";
 
             base.OnBeforeInstall(savedState);
         }

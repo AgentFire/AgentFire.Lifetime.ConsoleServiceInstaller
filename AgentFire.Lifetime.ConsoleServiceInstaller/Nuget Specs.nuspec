@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>AgentFire.Lifetime.ConsoleServiceInstaller</id>
-    <version>2.0</version>
+    <version>2.2</version>
     <title>Console Service Installer</title>
     <authors>AgentFire</authors>
     <owners>AgentFire</owners>
